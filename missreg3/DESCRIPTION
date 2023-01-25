@@ -1,0 +1,14 @@
+Package: missreg3
+Type: Package
+Title: Regression Functions for Two-phase Response-selective Sampled
+        Data
+Version: 3.0
+Date: 2013-03-19
+Author: Chris Wild <c.wild@auckland.ac.nz>, with contributions from Yannan Jiang <y.jiang@auckland.ac.nz>.
+Maintainer: Yannan Jiang <y.jiang@auckland.ac.nz>
+Depends: R (>= 2.15.0), glmmML, gtools
+Description: Performs a variety of regression analyses using semiparametric maximum likelihood for data subject to response selection and two-stage missingness.
+License: GPL (>= 2)
+URL: http://www.stat.auckland.ac.nz/~wild
+LazyLoad: yes
+Packaged: 2013-03-18 23:01:06 UTC; yjia005
