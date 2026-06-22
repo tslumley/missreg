@@ -27,12 +27,12 @@ Terms <- y1vname <- attr(mf1,"terms")
 X1 <- model.matrix(Terms,mf1)
 if(!is.matrix(X1)) X1 <- matrix(X1)
 X1Orig <- X1
-w <- model.extract(mf1, weights)
+w <- model.extract(mf1, "weights")
 terms1 <- attr(terms(formula1),"term.labels")
 order1 <- attr(terms(formula1),"order")
 assign1 <- attr(X1,"assign")
 fnames1<-names(attr(X1,"contrasts"))
-y1 <- model.extract(mf1,response)
+y1 <- model.extract(mf1,"response")
 names(y1) <- NULL
 
 
@@ -51,7 +51,7 @@ terms2 <- attr(terms(formula2),"term.labels")
 order2 <- attr(terms(formula2),"order")
 assign2 <- attr(X2,"assign")
 fnames2<-names(attr(X2,"contrasts"))
-y2 <- model.extract(mf2,response)
+y2 <- model.extract(mf2,"response")
 names(y2) <- NULL
 
 
@@ -71,7 +71,6 @@ fnames3 <- names(attr(X3,"contrasts"))
  
 
 # -----------------------------------------------------------------------------------
-if (!is.R())  xtabs <- xtabsforS  ### So can run in Splus ###
 
 n <- if (is.matrix(y2)) dim(y2)[1] else length(y2)
 if (is.null(w)) w <- rep(1,n)
@@ -508,7 +507,7 @@ invisible(x)
 
 
 #####################################################################################
-summary.bivlocsc2stg <- function(object) {
+summary.bivlocsc2stg <- function(object,...) {
 #####################################################################################
 
 # Works for R only so far

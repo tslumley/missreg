@@ -14,13 +14,13 @@ NULL -> mf$xstrata -> mf$obstype.name -> mf$fit -> mf$xs.includes -> mf$linkname
 NULL -> mf$start -> mf$Qstart -> mf$int.rescale -> mf$off.set -> mf$control -> mf$control.inner
  
 mf <- eval(mf, sys.frame(sys.parent()))
-y <- model.extract(mf,response)
+y <- model.extract(mf,"response")
 n <- if (is.matrix(y)) dim(y)[1] else length(y)
 Terms <- attr(mf,"terms")
 X <- model.matrix(Terms,mf)
 if(!is.matrix(X)) X <- matrix(X)
 XOrig <- X
-w <- model.extract(mf,weights)
+w <- model.extract(mf,"weights")
 if(is.null(w)) w <- rep(1,n)
 terms1 <- attr(terms(formula),"term.labels")
 order1 <- attr(terms(formula),"order")
@@ -188,7 +188,6 @@ if (!prospective) {
    	if  (havestrata & xs.includes) rk[obstype=="uncond"] <- -1 * w[obstype=="uncond"]
    	rk[obstype=="strata"] <- 1 * w[obstype=="strata"]
 
-   	if (!is.R()) xtabs <- xtabsforS ### So can run in Splus ###
 
    	rmat <- xtabs(rk~y+xStrat)
    	rmat <- matrix(rmat,dim(rmat)[1],dim(rmat)[2],dimnames=dimnames(rmat)[1:2])
@@ -202,8 +201,7 @@ if (!prospective) {
                               else (1:n)[obstype=="strata"]
        	 temp <- xtabs(w~y+xStrat,data=data.frame(y,xStrat,w,obstype)[ind,])
 
-#      	 if (!is.R()) temp <- matrix(as.vector(temp),2,nStrat)
-      	  if (is.matrix(temp) && (dim(temp) == c(2,nStrat)) && min(temp)>0)
+      	  if (is.matrix(temp) && all(dim(temp) == c(2,nStrat)) && min(temp)>0)
        	                 Qmat <- sweep(temp,2,apply(temp,2,sum),"/")
       		 else  stop("Attempt to construct missing Qstart failed")
    	}
@@ -358,7 +356,7 @@ invisible(x)
 }
 
 #####################################################################################
-summary.bin2stg <- function(object) {
+summary.bin2stg <- function(object,...) {
 #####################################################################################
 
 # Works for R only so far

@@ -1,5 +1,7 @@
 \name{mlefn}
 \alias{mlefn}
+\alias{mlefn.control}
+\alias{mlefn.control.inner}
 \title{A modified Newton maximiser}
 \description{
 A function to maximise, minimise or find stationary values for a (general) function.  It was

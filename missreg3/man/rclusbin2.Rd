@@ -8,7 +8,7 @@ Random intercept model for clustered binary data following case-control sampling
 Fits random intercept models to clustered binary data after case and control sampling, wherein interest is in the relationship between a binary response (Y) that is related to the sampling variable (Z).
 }
 \usage{
-rclusbin2 <- function(formula1, formula2, weights=NULL, ClusInd.name=NULL, IntraClus.name=NULL, yname, xstrata=NULL, ystrata, 
+rclusbin2(formula1, formula2, weights=NULL, ClusInd.name=NULL, IntraClus.name=NULL, yname, xstrata=NULL, ystrata, 
 obstype.name="obstype", data, NMat=NULL, xs.includes=FALSE, MaxInClus=NULL, rmsingletons=FALSE, retrosamp=TRUE, 
 nzval0=20, fit=TRUE, devcheck=FALSE, linkname="logit", start=NULL, Qstart=NULL, sigma=NULL, paruse="xis", 
 control=mlefn.control(...), control.inner=mlefn.control.inner(...), ...)

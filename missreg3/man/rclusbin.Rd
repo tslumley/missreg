@@ -8,7 +8,7 @@ Random intercept model for clustered binary data
 Fits random intercept models to clustered binary data with the two-phase missingness structure.
 }
 \usage{
-rclusbin <- function(formula, data, weights=NULL, ClusInd=NULL, IntraClus=NULL, xstrata=NULL, ystrata=NULL, 
+rclusbin(formula, data, weights=NULL, ClusInd=NULL, IntraClus=NULL, xstrata=NULL, ystrata=NULL, 
 obstype.name="obstype", NMat=NULL, xs.includes=FALSE, MaxInClus=NULL, rmsingletons=FALSE, retrosamp="proband", 
 gamma=NULL, nzval0=20, fit=TRUE, devcheck=FALSE, linkname="logit", start=NULL, Qstart=NULL, sigma=NULL, 
 control=mlefn.control(...), control.inner=mlefn.control.inner(...), ...)

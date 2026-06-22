@@ -31,17 +31,16 @@ Terms <- attr(mf1,"terms")
 X1 <- model.matrix(Terms,mf1)
 if(!is.matrix(X1)) X1 <- matrix(X1)
 X1Orig <- X1
-w <- model.extract(mf1,weights)
+w <- model.extract(mf1,"weights")
 terms1 <- attr(terms(formula1),"term.labels")
 order1 <- attr(terms(formula1),"order")
 assign1 <- attr(X1,"assign")
 fnames1<-names(attr(X1,"contrasts"))
-y <- model.extract(mf1,response)
+y <- model.extract(mf1,"response")
 
 
 #------------------------------------------------------------------------------------
 
-if (!is.R()) xtabs <- xtabsforS ### So can run in Splus ###
 
 n <- if (is.matrix(y)) dim(y)[1] else length(y)
 if(is.null(w)) w <- rep(1,n)
@@ -186,7 +185,7 @@ if (!(is.null(xstrata))) { # Form key to xStrat
 
 if (!fit) {
      ans <- list(missReport=missReport, StrReport=StrReport, xStrReport=xStrReport, key=key, yCutsKey=yCutsKey, fit=fit,
-            call=call, assign1=assign1, assign2=assign2,
+            call=call, assign1=assign1, assign2=NULL, ## was assign2=assign2, but I see no assign2 here
             fnames1=fnames1, fnames2=fnames2,terms1=terms1, terms2=terms2,
             order1=order1, order2=order2, n1=length(terms1)+1, n2=length(terms2)+1)
      class(ans) <- "locsc2stg"
@@ -217,7 +216,6 @@ if (!prospective & !is.null(yCuts)){
                               else (1:n)[obstype=="strata"]
         temp <- xtabs(w~yStrat+xStrat,data=data.frame(yStrat=yStratfac,xStrat=xStratfac,w,obstype)[ind,])
     
-#        if (!is.R()) temp <- matrix(as.vector(temp),nyStrat,nStrat)
         if (is.matrix(temp) && (dim(temp) == c(nyStrat,nStrat)))	{
                   temp[is.na(yCutsKey)] <- NA
                   Qmat <- sweep(temp+1,2,apply(temp+1,2,FUN=function(x)sum(x,na.rm=TRUE)),"/")

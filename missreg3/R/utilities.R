@@ -422,7 +422,7 @@ for (i in 1:nvar) {
 }
 
 torow <- prod(nvalue)
-nvmat <- matrix(NA,nr=torow,nc=nvar)
+nvmat <- matrix(NA,nrow=torow,ncol=nvar)
 nvmat[,1] <- rep(vvalue[[1]],torow/nvalue[1])
 if (nvar >1) {
   for (j in 2:nvar)
