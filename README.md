@@ -1,8 +1,6 @@
-# missreg
-Code by Jiang and Wild for the Auckland semiparametric approach to two-phase models
+## missreg
+Code by Yannan Jiang and Chris Wild for the Auckland semiparametric approach to two-phase models
 
-This is *mostly* functional now, but needs packaging updates and a few code corrections to run in contemporary R. In particular, NAMESPACE upgrades, bits of dead code, S-plus compability shims, things without documentation, methods without ..., and so on
-
-
+The code now passes CMD check except that a bunch of objects that were deliberately not documented by the original authors aren't documented.
 
 Longer term, I want to make it run off twophase() objects from the survey package

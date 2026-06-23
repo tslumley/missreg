@@ -78,7 +78,7 @@ distributions with various types of observations collected at different two-phas
 sampling schemes. More detailed descriptions of this function can be found in 
 "Description of the \code{missreg} Library" (Wild and Jiang).
 
-\cr \cr \cr Two methods are implemented with either Y being categorical 
+Two methods are implemented with either Y being categorical 
 (\code{"ycutmeth"}) or at a continuous scale (\code{"direct"}). The argument 
 \code{yCuts} is critical to the first approach but only required for the second 
 approach when a starting value is needed. If \code{yCuts} is a vector, it defines 
