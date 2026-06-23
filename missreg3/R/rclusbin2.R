@@ -709,9 +709,9 @@ if (!is.null(x$missReport)){
 }
 
 cat("\nCluster Size Report:\n")
-print(x$ClusReport,quote = FALSE, row.names=FALSE)
+print(x$ClusReport, row.names=FALSE)
 cat("\nStratum Counts Report:\n")
-print(x$StrReport,quote = FALSE, row.names=FALSE)
+print(x$StrReport, row.names=FALSE)
 if (!is.null(x$xStrReport)) {
     cat("\nObservations of obstype==xonly\n")
     print(x$xStrReport)
@@ -833,11 +833,11 @@ if (!is.null(x$missReport)){
 }
 
 cat("\nCluster Size Report:\n")
-print(x$ClusReport,quote = FALSE, row.names=FALSE)
+print(x$ClusReport, row.names=FALSE)
 cat("\nStratum Counts Report:\n")
 
 cat("\nStratum Counts Report:\n")
-print(x$StrReport,quote = FALSE, row.names=FALSE)
+print(x$StrReport, row.names=FALSE)
 if (!is.null(x$xStrReport)) {
     cat("\nObservations of obstype==xonly\n")
     print(x$xStrReport)
@@ -881,3 +881,5 @@ else cat("\nCall requested that model not be fitted.\n")
 
 invisible(x)
 }
+
+utils::globalVariables(c("counts","w"))

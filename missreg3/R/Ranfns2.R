@@ -19,8 +19,8 @@ model.apply <- function(formula,data,weights=NULL){
   Terms <- attr(mf,"terms")
   X <- model.matrix(Terms,mf)
   if(!is.matrix(X)) X <- matrix(X)
-  weights <- model.extract(mf, weights)
-  y <- model.extract(mf,response)
+  weights <- model.extract(mf, "weights")
+  y <- model.extract(mf,"response")
 
   terms1 <- attr(terms(formula),"term.labels")
   order1 <- attr(terms(formula),"order")

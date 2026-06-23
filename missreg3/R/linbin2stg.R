@@ -187,7 +187,7 @@ if (!fit) {
      ans <- list(missReport=missReport, StrReport=StrReport, xStrReport=xStrReport, key=key, yCutsKey=yCutsKey, fit=fit,
             call=call, assign1=assign1, assign2=NULL, ## was assign2=assign2, but I see no assign2 here
             fnames1=fnames1, fnames2=NULL,terms1=terms1, terms2=NULL,
-            order1=order1, order2=NULL, n1=length(terms1)+1, n2=length(terms2)+1)
+            order1=order1, order2=NULL, n1=length(terms1)+1, n2=0+1) ##n2 was length(terms2)+1
      class(ans) <- "locsc2stg"
      return(ans) # RETURN AT THIS POINT IF fit IS FALSE
 }

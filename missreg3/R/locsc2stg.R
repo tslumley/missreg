@@ -267,7 +267,7 @@ if (!prospective & !is.null(yCuts)){
     }
     else { # Qstart is present
         if(is.matrix(Qstart) && all(dim(Qstart) == c(nyStrat,nStrat)) &&  # matrix with correct dimensions
-                (round(apply(Qstart,2,sum),5) == rep(1,dim(Qstart)[2]))) # cols sum to 1
+                all(round(apply(Qstart,2,sum),5) == rep(1,dim(Qstart)[2]))) # cols sum to 1
                Qmat <- Qstart
         else stop("illegal Qstart value")
     }
@@ -422,7 +422,7 @@ if (!prospective & method=="direct"){
     for (j in 1:nStrat) lBmax <- max(length(Bposn[xStrat[Bposn]==j]),lBmax)
     if (!is.null(deltastart)) {
         deltamat <- deltastart
-        if (dim(deltamat) != c(lBmax,nStrat)) stop(paste(
+        if (any(dim(deltamat) != c(lBmax,nStrat))) stop(paste(
                   "Dimension problems with deltastart,dim=", dim(deltamat)))
     }
     else if (!is.null(yCuts)){ # continue calculations of starting values for deltas
@@ -523,7 +523,7 @@ if (!is.null(x$missReport)){
     print(x$missReport,quote = FALSE, row.names=FALSE)
 }
 cat("\nStratum Counts Report:\n")
-print(x$StrReport,quote = FALSE, row.names=FALSE)
+print(x$StrReport, row.names=FALSE)
 if (!is.null(x$xStrReport)) {
     cat("\nObservations of obstype==xonly\n")
     print(x$xStrReport)
@@ -635,7 +635,7 @@ if (!is.null(x$missReport)){
     print(x$missReport,quote = FALSE, row.names=FALSE)
 }
 cat("\nStratum Counts Report:\n")
-print(x$StrReport,quote = FALSE, row.names=FALSE)
+print(x$StrReport, row.names=FALSE)
 if (!is.null(x$xStrReport)) {
     cat("\nObservations of obstype==xonly\n")
     print(x$xStrReport)
@@ -1259,7 +1259,7 @@ if (!is.null(x$missReport)){
     print(x$missReport,quote = FALSE, row.names=FALSE)
 }
 cat("\nStratum Counts Report:\n")
-print(x$StrReport,quote = FALSE, row.names=FALSE)
+print(x$StrReport, row.names=FALSE)
 if (!is.null(x$xStrReport)) {
     cat("\nObservations of obstype==xonly\n")
     print(x$xStrReport)
