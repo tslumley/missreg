@@ -38,14 +38,14 @@ mf1$na.action <- as.name("na.keep")
 resp1 <- yname
 names(mf1)[2] <- "formula"
 mf1 <- eval(mf1, sys.frame(sys.parent()))
-y <- model.extract(mf1,response)
+y <- model.extract(mf1,"response")
 names(y) <- NULL
 n <- if (is.matrix(y)) dim(y)[1] else length(y)
 Terms <- attr(mf1,"terms")
 X <- model.matrix(Terms,mf1)
 if(!is.matrix(X)) X <- matrix(X)
 XOrig <- X
-w <- model.extract(mf1,weights)
+w <- model.extract(mf1,"weights")
 if (is.null(w)) w <- rep(1,n)
 
 terms1 <- attr(terms(formula1),"term.labels")
@@ -420,8 +420,6 @@ if (!prosp) {
        rk[z1$obstype=="uncond"] <- -1 * z1$counts[z1$obstype=="uncond"]
      rk[z1$obstype=="strata"] <- 1 * z1$counts[z1$obstype=="strata"]
 
-     if (!is.R()) xtabs <- xtabsforS ### So can run in Splus ###
-   
      rmat <- xtabs(rk~yStrat+xStrat, data=data.frame(rk=rk, yStrat=yStratfac,
                    xStrat=xStratfac))
      rmat <- matrix(rmat,dim(rmat)[1],dim(rmat)[2],dimnames=dimnames(rmat)[1:2])
@@ -746,7 +744,7 @@ invisible(x)
 
 
 #####################################################################################
-summary.rclusbin2 <- function(object) {
+summary.rclusbin2 <- function(object,...) {
 #####################################################################################
 
 # Works for R only so far

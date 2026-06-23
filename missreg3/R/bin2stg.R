@@ -206,7 +206,7 @@ if (!prospective) {
       		 else  stop("Attempt to construct missing Qstart failed")
    	}
    	else { # Qstart is present
-      	  	if(is.matrix(Qstart) && (dim(Qstart) == c(2,nStrat)) &&  # matrix with correct dimensions
+      	  	if(is.matrix(Qstart) && all(dim(Qstart) == c(2,nStrat)) &&  # matrix with correct dimensions
          	  (round(apply(Qstart,2,sum),5) == rep(1,dim(Qstart)[2]))) # cols sum to 1
               		Qmat <- Qstart
         	else stop("illegal Qstart value")
@@ -427,7 +427,7 @@ if (!is.null(x$missReport)){
     print(x$missReport,quote = FALSE, row.names=FALSE)
 }
 cat("\nStratum Counts Report:\n")
-print(x$StrReport,quote = FALSE, row.names=FALSE)
+print(x$StrReport, row.names=FALSE)
 if (!is.null(x$xStrReport)) {
     cat("\nObservations of obstype==xonly\n")
     print(x$xStrReport)
@@ -436,7 +436,7 @@ if (!is.null(x$xStrReport)) {
 cat("\nModel for prob of ", x$yKey[1],"=",x$yKey[2]," (y=1)  given covariates\n",sep="")
 if (!is.null(x$key)) {
     cat("\nKey to x-Strat:\n")
-    print.default(x$key,quote=FALSE, row.names=FALSE)
+    print.default(x$key, quote=FALSE, row.names=FALSE)
 }
 
 if (x$fit) {

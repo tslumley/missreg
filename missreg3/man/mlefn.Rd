@@ -60,7 +60,8 @@ Used only if \code{constrain}=\code{"fix"}. }
   \item{Aconstrain}{an \code{I} matrix with number of rows equal to the number of "fixed" parameters. 
 Used only if \code{constrain}=\code{"fix"}. }
   \item{cconstrain}{A vector specifying the values of those "fixed" parameters. \cr 
-Used only if \code{constrain}=\code{"fix"}. }
+    Used only if \code{constrain}=\code{"fix"}. }
+  \item{control}{to pass control options}
   \item{\dots}{Further arguments passed to or from related functions.}
 }
 \details{

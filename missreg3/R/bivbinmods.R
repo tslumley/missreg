@@ -291,7 +291,7 @@ copula1 <- function(eta,nderivs=2){
 ####################################################################
 alpha <- eta[,3]
 hfn  <- function(alpha,t){
-if(alpha!=0 && t!=0)
+if(any(alpha!=0) && any(t!=0))
   res <- log((exp(-alpha)-1)/(exp(-alpha*t)-1))
 else
   res <- -log(t)

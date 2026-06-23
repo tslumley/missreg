@@ -186,8 +186,8 @@ if (!(is.null(xstrata))) { # Form key to xStrat
 if (!fit) {
      ans <- list(missReport=missReport, StrReport=StrReport, xStrReport=xStrReport, key=key, yCutsKey=yCutsKey, fit=fit,
             call=call, assign1=assign1, assign2=NULL, ## was assign2=assign2, but I see no assign2 here
-            fnames1=fnames1, fnames2=fnames2,terms1=terms1, terms2=terms2,
-            order1=order1, order2=order2, n1=length(terms1)+1, n2=length(terms2)+1)
+            fnames1=fnames1, fnames2=NULL,terms1=terms1, terms2=NULL,
+            order1=order1, order2=NULL, n1=length(terms1)+1, n2=length(terms2)+1)
      class(ans) <- "locsc2stg"
      return(ans) # RETURN AT THIS POINT IF fit IS FALSE
 }
@@ -216,14 +216,14 @@ if (!prospective & !is.null(yCuts)){
                               else (1:n)[obstype=="strata"]
         temp <- xtabs(w~yStrat+xStrat,data=data.frame(yStrat=yStratfac,xStrat=xStratfac,w,obstype)[ind,])
     
-        if (is.matrix(temp) && (dim(temp) == c(nyStrat,nStrat)))	{
+        if (is.matrix(temp) && all(dim(temp) == c(nyStrat,nStrat)))	{
                   temp[is.na(yCutsKey)] <- NA
                   Qmat <- sweep(temp+1,2,apply(temp+1,2,FUN=function(x)sum(x,na.rm=TRUE)),"/")
         }
         else  stop("Attempt to construct missing Qstart failed")
     }
     else { # Qstart is present
-        if(is.matrix(Qstart) && (dim(Qstart) == c(nyStrat,nStrat)) &&  # matrix with correct dimensions
+        if(is.matrix(Qstart) && all(dim(Qstart) == c(nyStrat,nStrat)) &&  # matrix with correct dimensions
                 (round(apply(Qstart,2,sum),5) == rep(1,dim(Qstart)[2]))) # cols sum to 1
                Qmat <- Qstart
         else stop("illegal Qstart value")
@@ -463,7 +463,7 @@ invisible(x)
 }
 
 #####################################################################################
-summary.linbin2stg <- function(object) {
+summary.linbin2stg <- function(object,...) {
 #####################################################################################
 
     z <- object
@@ -552,7 +552,7 @@ if (!is.null(x$missReport)){
     print(x$missReport,quote = FALSE, row.names=FALSE)
 }
 cat("\nStratum Counts Report:\n")
-print(x$StrReport,quote = FALSE, row.names=FALSE)
+print(x$StrReport, row.names=FALSE)
 if (!is.null(x$xStrReport)) {
     cat("\nObservations of obstype==xonly\n")
     print(x$xStrReport)

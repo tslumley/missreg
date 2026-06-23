@@ -24,7 +24,7 @@ NULL-> mf$fit -> mf$devcheck -> mf$linkname -> mf$start -> mf$Qstart -> mf$sigma
 NULL -> mf$control -> mf$control.inner
 
 mf <- eval(mf, sys.frame(sys.parent()))
-y <- model.extract(mf,response)
+y <- model.extract(mf,"response")
 n <- if (is.matrix(y)) dim(y)[1] else length(y)
 Terms <- attr(mf,"terms")
 X <- model.matrix(Terms,mf)
@@ -381,8 +381,6 @@ if (!prosp) {
        rk[z1$obstype=="uncond"] <- -1 * z1$counts[z1$obstype=="uncond"]
      rk[z1$obstype=="strata"] <- 1 * z1$counts[z1$obstype=="strata"]
 
-     if (!is.R()) xtabs <- xtabsforS ### So can run in Splus ###
-   
      rmat <- xtabs(rk~yStrat+xStrat, data=data.frame(rk=rk, yStrat=yStratfac,
                    xStrat=xStratfac))
      rmat <- matrix(rmat,dim(rmat)[1],dim(rmat)[2],dimnames=dimnames(rmat)[1:2])
@@ -679,7 +677,7 @@ invisible(x)
 
 
 #####################################################################################
-summary.rclusbin<-function(object){
+summary.rclusbin<-function(object,...){
 #####################################################################################
 z <- object
 if (!z$fit) stop("No summary provided when fit=FALSE !")

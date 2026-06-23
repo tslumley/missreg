@@ -19,10 +19,10 @@ ML2directInf(theta, nderivs = 2, modelfn, hmodelfn, x, y, Aposn,
   \item{nderivs}{Number of derivatives to be calculated. Either 0 (loglikelihood
 value only), 1 (also return score vector), or 2 (also return information matrix). }
   \item{modelfn}{A class of sub-functions called by \code{ML2directInf} to supply 
-values and their derivatives with respect to the \code{eta's} (M linear predictors 
+values and their derivatives with respect to the \code{eta}'s (M linear predictors 
 with respect to \code{theta}) for the model of interest \code{f(Y|X;theta)}.  }
   \item{hmodelfn}{A class of sub-functions called by \code{ML2directInf} to supply
-values and their derivatives with respect to the \code{eta's} for 
+values and their derivatives with respect to the \code{eta}'s for 
 \code{pr(h_k|x_j;theta)} under the same class of models. } 
   \item{x}{A 3-dimensional array (R*C*M) specifying the covariates values,
 with R the number of observations, C the length of \code{theta} and M the number of 

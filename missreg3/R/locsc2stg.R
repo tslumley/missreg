@@ -34,12 +34,12 @@ Terms <- attr(mf1,"terms")
 X1 <- model.matrix(Terms,mf1)
 if(!is.matrix(X1)) X1 <- matrix(X1)
 X1Orig <- X1
-w <- model.extract(mf1,weights)
+w <- model.extract(mf1,"weights")
 terms1 <- attr(terms(formula1),"term.labels")
 order1 <- attr(terms(formula1),"order")
 assign1 <- attr(X1,"assign")
 fnames1<-names(attr(X1,"contrasts"))
-y <- model.extract(mf1,response)
+y <- model.extract(mf1,"response")
 
 # Second formula processing ---------------------------------------------------------
 
@@ -59,7 +59,6 @@ fnames2<-names(attr(X2,"contrasts"))
 colnames(X2) <- paste(colnames(X2), "2", sep = ".") # So names distinct
 #------------------------------------------------------------------------------------
 
-if (!is.R()) xtabs <- xtabsforS ### So can run in Splus ###
 
 n <- if (is.matrix(y)) dim(y)[1] else length(y)
 if(is.null(w)) w <- rep(1,n)
@@ -260,15 +259,14 @@ if (!prospective & !is.null(yCuts)){
                               else (1:n)[obstype=="strata"]
         temp <- xtabs(w~yStrat+xStrat,data=data.frame(yStrat=yStratfac,xStrat=xStratfac,w,obstype)[ind,])
     
-#        if (!is.R()) temp <- matrix(as.vector(temp),nyStrat,nStrat)
-        if (is.matrix(temp) && (dim(temp) == c(nyStrat,nStrat)))	{
+        if (is.matrix(temp) && all(dim(temp) == c(nyStrat,nStrat)))	{
                   temp[is.na(yCutsKey)] <- NA
                   Qmat <- sweep(temp+1,2,apply(temp+1,2,FUN=function(x)sum(x,na.rm=TRUE)),"/")
         }
         else  stop("Attempt to construct missing Qstart failed")
     }
     else { # Qstart is present
-        if(is.matrix(Qstart) && (dim(Qstart) == c(nyStrat,nStrat)) &&  # matrix with correct dimensions
+        if(is.matrix(Qstart) && all(dim(Qstart) == c(nyStrat,nStrat)) &&  # matrix with correct dimensions
                 (round(apply(Qstart,2,sum),5) == rep(1,dim(Qstart)[2]))) # cols sum to 1
                Qmat <- Qstart
         else stop("illegal Qstart value")
@@ -553,7 +551,7 @@ invisible(x)
 }
 
 #####################################################################################
-summary.locsc2stg <- function(object) {
+summary.locsc2stg <- function(object,...) {
 #####################################################################################
 
     z <- object
@@ -715,7 +713,7 @@ terms1 <- attr(terms(formula1),"term.labels")
 order1 <- attr(terms(formula1),"order")
 assign1 <- attr(X1,"assign")
 fnames1<-names(attr(X1,"contrasts"))
-y <- model.extract(mf1,response)
+y <- model.extract(mf1,"response")
 
 # Second formula processing ---------------------------------------------------------
 
@@ -735,7 +733,6 @@ fnames2<-names(attr(X2,"contrasts"))
 colnames(X2) <- paste(colnames(X2), "2", sep = ".") # So names distinct
 #------------------------------------------------------------------------------------
 
-if (!is.R()) xtabs <- xtabsforS ### So can run in Splus ###
 
 n <- if (is.matrix(y)) dim(y)[1] else length(y)
 w <- weights
@@ -1150,7 +1147,7 @@ if (!is.null(x$missReport)){
     print(x$missReport,quote = FALSE, row.names=FALSE)
 }
 cat("\nStratum Counts Report:\n")
-print(x$StrReport,quote = FALSE, row.names=FALSE)
+print(x$StrReport, row.names=FALSE)
 if (!is.null(x$xStrReport)) {
     cat("\nObservations of obstype==xonly\n")
     print(x$xStrReport)
@@ -1178,7 +1175,7 @@ invisible(x)
 }
 
 #####################################################################################
-summary.locsc2stgwtd <- function(object) {
+summary.locsc2stgwtd <- function(object,...) {
 #####################################################################################
 
     z <- object

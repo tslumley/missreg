@@ -27,6 +27,7 @@ Strata are defined by cross-classification of all levels.}
   \item{obstype.name}{Name of the variable specifying labels for observations 
 by sampling and variable type: \code{"uncond"},\code{"retro"},\code{"y|x"},
 \code{"xonly"}, or \code{"strata"}.}
+\item{data}{The data}
   \item{fit}{If \code{FALSE}, only stratum report will be generated without model fitting.}
   \item{xs.includes}{\code{TRUE} if weights specified for observations labelled as 
 \code{"strata"} include those observed at the second phase (i.e. \code{"uncond"} or

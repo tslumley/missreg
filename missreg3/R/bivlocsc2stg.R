@@ -320,12 +320,12 @@ if (!prospective) {
             else (1:n)[obstype=="strata"]
      temp <- xtabs(w~yStrat+xStrat,data=data.frame(yStrat=yStratfac,xStrat=xStratfac,w)[ind,])
 
-     if (is.matrix(temp) && (dim(temp) == c(2,nStrat)) && min(temp)>0)
+     if (is.matrix(temp) && all(dim(temp) == c(2,nStrat)) && min(temp)>0)
        	    Qmat <- sweep(temp,2,apply(temp,2,sum),"/")
      else  stop("Attempt to construct missing Qstart failed")
    }
    else { # Qstart is present
-      if(is.matrix(Qstart) && (dim(Qstart) == c(2,nStrat)) &&  # matrix with correct dimensions
+      if(is.matrix(Qstart) && all(dim(Qstart) == c(2,nStrat)) &&  # matrix with correct dimensions
          (round(apply(Qstart,2,sum),5) == rep(1,dim(Qstart)[2]))) # cols sum to 1
             Qmat <- Qstart
       else stop("illegal Qstart value")
@@ -478,7 +478,7 @@ if (!is.null(x$missReport)){
     print(x$missReport,quote = FALSE, row.names=FALSE)
 }
 cat("\nStratum Counts Report:\n")
-print(x$StrReport,quote = FALSE, row.names=FALSE)
+print(x$StrReport,row.names=FALSE)
 if (!is.null(x$xStrReport)) {
     cat("\nObservations of obstype==xonly\n")
     print(x$xStrReport)
@@ -595,7 +595,7 @@ if (!is.null(x$missReport)){
     print(x$missReport,quote = FALSE, row.names=FALSE)
 }
 cat("\nStratum Counts Report:\n")
-print(x$StrReport,quote = FALSE, row.names=FALSE)
+print(x$StrReport, row.names=FALSE)
 if (!is.null(x$xStrReport)) {
     cat("\nObservations of obstype==xonly\n")
     print(x$xStrReport)
@@ -611,7 +611,7 @@ if (!is.null(x$key)) {
 if (x$fit) {
    if (x$error != 0) print("WARNING, FIT UNSUCCESSFUL")
     cat("\nloglikelihood =",x$loglk, "  using", length(coef(x)), "parameters\n\n")  
-  
+   
     if(!is.null(x$coef.table1)){
         cat("\nY1-Model\n") 
         cat("Wald Tests:\n")
